@@ -7,9 +7,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role { USER ADMIN }
-enum GiftStatus { SUCCEEDED REFUNDED FAILED }
-enum MitzvahType { BAR BAT BNEI BNOT }
+enum Role {
+  USER
+  ADMIN
+}
+
+enum GiftStatus {
+  SUCCEEDED
+  REFUNDED
+  FAILED
+}
+
+enum MitzvahType {
+  BAR
+  BAT
+  BNEI
+  BNOT
+}
 
 model User {
   id         String   @id @default(cuid())

@@ -1,0 +1,62 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  role      Role     @default(USER)
+  connectId String?
+  events    Event[]
+  createdAt DateTime @default(now())
+}
+
+model Charity {
+  id           String   @id @default(cuid())
+  name         String
+  country      String   // "CA"
+  ein          String?  // CRA reg number / BN
+  logoUrl      String?
+  charityEmail String?
+  connectId    String?
+  approved     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  events       Event[]
+}
+
+model Event {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  childName  String
+  type       MitzvahType
+  slug       String   @unique
+  date       DateTime?
+  synagogue  String?
+  heroUrl    String?
+  charityId  String
+  charity    Charity  @relation(fields: [charityId], references: [id])
+  goalAmount Int?
+  isPublic   Boolean  @default(true)
+  gifts      Gift[]
+  createdAt  DateTime @default(now())
+}
+
+model Gift {
+  id           String   @id @default(cuid())
+  eventId      String
+  event        Event    @relation(fields: [eventId], references: [id])
+  amount       Int      // cents
+  currency     String   // "cad"
+  donorName    String?
+  donorEmail   String?
+  message      String?
+  isPublic     Boolean  @default(false)
+  wantReceipt  Boolean  @default(false)
+  stripePI     String?
+  status       GiftStatus @default(SUCCEEDED)
+  createdAt    DateTime @default(now())
+}
+
+enum Role { USER ADMIN }
+enum GiftStatus { SUCCEEDED REFUNDED FAILED }
+enum MitzvahType { BAR BAT BNEI BNOT }

@@ -1,0 +1,1 @@
+import { getServerSession } from 'next-auth'; export async function requireSession(){ const s=await getServerSession(); return s?.user?.email? s: null; }

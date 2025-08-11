@@ -1,65 +1,40 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-enum Role {
-  USER
-  ADMIN
-}
-
-enum GiftStatus {
-  SUCCEEDED
-  REFUNDED
-  FAILED
-}
-
-enum MitzvahType {
-  BAR
-  BAT
-  BNEI
-  BNOT
-}
-
-model User {
-  id         String   @id @default(cuid())
-  email      String   @unique
-  role       Role     @default(USER)
-  connectId  String?
-  events     Event[]
-  createdAt  DateTime @default(now())
-}
-
-model Charity {
-  id         String   @id @default(cuid())
-  name       String
-  email      String?
-  createdAt  DateTime @default(now())
-  gifts      Gift[]
-}
-
-model Event {
-  id         String       @id @default(cuid())
-  slug       String       @unique
-  childName  String
-  mitzvah    MitzvahType
-  charityId  String
-  charity    Charity      @relation(fields: [charityId], references: [id])
-  hostId     String
-  host       User         @relation(fields: [hostId], references: [id])
-  createdAt  DateTime     @default(now())
-  gifts      Gift[]
-}
-
-model Gift {
-  id          String     @id @default(cuid())
-  eventId     String
-  event       Event      @relation(fields: [eventId], references: [id])
-  amountCents Int
-  status      GiftStatus @default(SUCCEEDED)
-  createdAt   DateTime   @default(now())
-}
+[19:48:10.660] Running build in Washington, D.C., USA (East) – iad1
+[19:48:10.660] Build machine configuration: 2 cores, 8 GB
+[19:48:10.710] Cloning github.com/mhershberg78/MitzvahJoy (Branch: main, Commit: 0b06ae9)
+[19:48:10.719] Skipping build cache, deployment was triggered without cache.
+[19:48:10.942] Cloning completed: 232.000ms
+[19:48:13.538] Running "vercel build"
+[19:48:14.005] Vercel CLI 44.7.3
+[19:48:14.368] Installing dependencies...
+[19:48:36.444] 
+[19:48:36.444] > mitzvahjoy@0.9.0 postinstall
+[19:48:36.445] > prisma generate
+[19:48:36.445] 
+[19:48:36.932] Prisma schema loaded from prisma/schema.prisma
+[19:48:37.015] Error: Prisma schema validation - (get-dmmf wasm)
+[19:48:37.015] Error code: P1012
+[19:48:37.015] [1;91merror[0m: [1mError validating field `gifts` in model `Charity`: The relation field `gifts` on model `Charity` is missing an opposite relation field on the model `Gift`. Either run `prisma format` or add it manually.[0m
+[19:48:37.015]   [1;94m-->[0m  [4mprisma/schema.prisma:42[0m
+[19:48:37.015] [1;94m   | [0m
+[19:48:37.016] [1;94m41 | [0m  createdAt  DateTime @default(now())
+[19:48:37.016] [1;94m42 | [0m  [1;91mgifts      Gift[][0m
+[19:48:37.016] [1;94m43 | [0m}
+[19:48:37.016] [1;94m   | [0m
+[19:48:37.016] [1;91merror[0m: [1mError validating field `charity` in model `Event`: The relation field `charity` on model `Event` is missing an opposite relation field on the model `Charity`. Either run `prisma format` or add it manually.[0m
+[19:48:37.016]   [1;94m-->[0m  [4mprisma/schema.prisma:51[0m
+[19:48:37.016] [1;94m   | [0m
+[19:48:37.016] [1;94m50 | [0m  charityId  String
+[19:48:37.016] [1;94m51 | [0m  [1;91mcharity    Charity      @relation(fields: [charityId], references: [id])[0m
+[19:48:37.016] [1;94m52 | [0m  hostId     String
+[19:48:37.017] [1;94m   | [0m
+[19:48:37.017] 
+[19:48:37.017] Validation Error Count: 2
+[19:48:37.017] [Context: getDmmf]
+[19:48:37.017] 
+[19:48:37.017] Prisma CLI Version : 5.22.0
+[19:48:37.029] npm error code 1
+[19:48:37.029] npm error path /vercel/path0
+[19:48:37.029] npm error command failed
+[19:48:37.029] npm error command sh -c prisma generate
+[19:48:37.029] npm error A complete log of this run can be found in: /vercel/.npm/_logs/2025-08-11T23_48_14_665Z-debug-0.log
+[19:48:37.080] Error: Command "npm install" exited with 1

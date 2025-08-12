@@ -1,8 +1,8 @@
-export default function Dashboard() {
+export default function DashboardPage() {
   return (
-    <main style={{ padding: "2rem" }}>
+    <div style={{ padding: '2rem' }}>
       <h1>Dashboard</h1>
-      <p>Welcome to your dashboard. (Placeholder page)</p>
-    </main>
+      <p>Welcome to your dashboard. (Placeholder)</p>
+    </div>
   );
 }

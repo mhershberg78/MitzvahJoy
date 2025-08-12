@@ -1,8 +1,8 @@
-export default function AdminCharities() {
+export default function AdminCharitiesPage() {
   return (
-    <main style={{ padding: "2rem" }}>
-      <h1>Admin · Charities</h1>
-      <p>Coming soon.</p>
-    </main>
+    <div style={{ padding: '2rem' }}>
+      <h1>Admin / Charities</h1>
+      <p>Admin placeholder page. (Placeholder)</p>
+    </div>
   );
 }

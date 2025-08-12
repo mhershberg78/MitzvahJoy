@@ -27,27 +27,41 @@ enum MitzvahType {
   BNOT
 }
 
-model Charity {
-  id        String   @id @default(uuid())
-  name      String
-  createdAt DateTime @default(now())
-  gifts     Gift[]   // Relation to Gift
-
-  events    Event[]  // Relation to Event
+model User {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  role       Role     @default(USER)
+  connectId  String?
+  events     Event[]
+  createdAt  DateTime @default(now())
 }
 
-model Gift {
-  id         String      @id @default(uuid())
-  amount     Int
-  status     GiftStatus
-  charity    Charity     @relation(fields: [charityId], references: [id])
-  charityId  String
+model Charity {
+  id         String   @id @default(cuid())
+  name       String
+  email      String?
+  createdAt  DateTime @default(now())
+  events     Event[]      // back-relation to Event.charity
 }
 
 model Event {
-  id         String       @id @default(uuid())
-  name       String
-  mitzvahType MitzvahType
-  charity    Charity      @relation(fields: [charityId], references: [id])
+  id         String       @id @default(cuid())
+  slug       String       @unique
+  childName  String
+  mitzvah    MitzvahType
   charityId  String
+  charity    Charity      @relation(fields: [charityId], references: [id])
+  hostId     String
+  host       User         @relation(fields: [hostId], references: [id])
+  createdAt  DateTime     @default(now())
+  gifts      Gift[]
+}
+
+model Gift {
+  id          String     @id @default(cuid())
+  eventId     String
+  event       Event      @relation(fields: [eventId], references: [id])
+  amountCents Int
+  status      GiftStatus @default(SUCCEEDED)
+  createdAt   DateTime   @default(now())
 }

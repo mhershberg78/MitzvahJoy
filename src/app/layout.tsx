@@ -1,5 +1,4 @@
 import "./globals.css";
-import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -34,12 +33,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <nav className="nav">
-          <Link className="brand" href="/">
+          <a className="brand" href="/">
             <img src="/logo.svg" width={24} height={24} alt="MitzvahJoy Logo" /> MitzvahJoy
-          </Link>
+          </a>
           <div style={{ flex: 1 }} />
-          <Link href="/dashboard">Dashboard</Link>
-          <Link href="/admin/charities">Admin</Link>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/admin/charities">Admin</a>
           <a href="/api/auth/signout">Sign out</a>
         </nav>
 

@@ -45,10 +45,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <div className="container">{children}</div>
 
-        <footer style={{ marginTop: 40, padding: 24, color: "#6b7280", textAlign: "center" }}>
+        <footer
+          style={{ marginTop: 40, padding: 24, color: "#6b7280", textAlign: "center" }}
+        >
           <span className="badge">90% to the child · 10% to charity</span>
           <div style={{ marginTop: 8 }}>
-            <a href="/fees">Fees</a> · <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> ·{" "}
+            <a href="/fees">Fees</a> · <a href="/terms">Terms</a> ·{" "}
+            <a href="/privacy">Privacy</a> ·{" "}
             <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>
           </div>
         </footer>

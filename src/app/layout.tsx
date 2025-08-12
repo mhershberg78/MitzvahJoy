@@ -41,12 +41,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <nav className="nav">
-          <Link className="brand" href="/">
+          <Link className="brand" href="/" as="/">
             <img src="/logo.svg" width={24} height={24} alt="" /> MitzvahJoy
           </Link>
           <div style={{ flex: 1 }} />
-          <Link href="/dashboard">Dashboard</Link>
-          <Link href="/admin/charities">Admin</Link>
+          <Link href="/dashboard" as="/dashboard">Dashboard</Link>
+          <Link href="/admin/charities" as="/admin/charities">Admin</Link>
           <a href="/api/auth/signout">Sign out</a>
         </nav>
 

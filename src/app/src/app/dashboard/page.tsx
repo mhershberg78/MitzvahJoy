@@ -1,8 +1,10 @@
+export const dynamic = "force-dynamic";
+
 export default function DashboardPage() {
   return (
-    <div style={{ padding: '2rem' }}>
+    <main className="container">
       <h1>Dashboard</h1>
       <p>Welcome to your dashboard. (Placeholder)</p>
-    </div>
+    </main>
   );
 }

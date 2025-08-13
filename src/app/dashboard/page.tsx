@@ -1,4 +1,4 @@
-import { db } from "../../lib/db";
+import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";

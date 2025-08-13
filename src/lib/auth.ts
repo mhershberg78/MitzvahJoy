@@ -1,1 +1,17 @@
-import { getServerSession } from 'next-auth'; export async function requireSession(){ const s=await getServerSession(); return s?.user?.email? s: null; }
+import { getServerSession } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import type { NextAuthOptions } from "next-auth";
+
+export const authOptions: NextAuthOptions = {
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+  ],
+};
+
+export async function requireSession() {
+  const session = await getServerSession(authOptions);
+  return session;
+}

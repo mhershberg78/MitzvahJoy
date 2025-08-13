@@ -1,10 +1,10 @@
-import { prisma } from "@/src/lib/prisma";
+import { db } from "../../lib/db";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 async function isAdmin(email?: string | null) {
   if (!email) return false;
-  const user = await prisma.user.findUnique({ where: { email } });
+  const user = await db.user.findUnique({ where: { email } });
   return Boolean(user?.role === "ADMIN"); // change to your role logic
 }
 
@@ -15,12 +15,12 @@ async function addCharity(formData: FormData) {
   const url = String(formData.get("url") || "").trim();
   if (!name) return;
 
-  await prisma.charity.create({ data: { name, url } });
+  await db.charity.create({ data: { name, url } });
 }
 
 async function deleteCharity(id: string) {
   "use server";
-  await prisma.charity.delete({ where: { id } });
+  await db.charity.delete({ where: { id } });
 }
 
 export default async function AdminCharitiesPage() {
@@ -30,7 +30,7 @@ export default async function AdminCharitiesPage() {
   const ok = await isAdmin(session.user.email);
   if (!ok) redirect("/"); // or show 403
 
-  const charities = await prisma.charity.findMany({
+  const charities = await db.charity.findMany({
     orderBy: { createdAt: "desc" },
   });
 

@@ -1,1 +1,23 @@
+import { db } from "@/lib/db";
 
+interface EventPageProps {
+  params: { slug: string };
+}
+
+export default async function EventPage({ params }: EventPageProps) {
+  const event = await db.event.findUnique({
+    where: { slug: params.slug },
+  });
+
+  if (!event) {
+    return <div>Event not found</div>;
+  }
+
+  return (
+    <div>
+      <h1>{event.childName}’s {event.mitzvahType} Mitzvah</h1>
+      <p>Slug: {event.slug}</p>
+      {/* Add more event details here */}
+    </div>
+  );
+}

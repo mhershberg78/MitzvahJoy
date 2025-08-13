@@ -1,4 +1,4 @@
-import { db } from "@/src/lib/db";           // this matches your current lib path
+import { db } from "../../../lib/db";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 

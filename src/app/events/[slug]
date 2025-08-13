@@ -15,7 +15,7 @@ export default async function EventPage({ params }: EventPageProps) {
 
   return (
     <div>
-      <h1>{event.childName}’s {event.mitzvahType} Mitzvah</h1>
+      <h1>{event.childName}'s {event.mitzvahType} Mitzvah</h1>
       <p>Slug: {event.slug}</p>
       {/* Add more event details here */}
     </div>

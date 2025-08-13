@@ -40,22 +40,23 @@ model Charity {
   id        String   @id @default(cuid())
   name      String
   email     String?
-  url       String?   // <-- NEW: optional URL for the charity
+  url       String?   // optional URL for the charity
   createdAt DateTime  @default(now())
-  events    Event[]   // back-relation to Event.charity
+  events    Event[]
 }
 
 model Event {
-  id         String       @id @default(cuid())
-  slug       String       @unique
-  childName  String
-  mitzvah    MitzvahType
-  charityId  String
-  charity    Charity      @relation(fields: [charityId], references: [id])
-  hostId     String
-  host       User         @relation(fields: [hostId], references: [id])
-  createdAt  DateTime     @default(now())
-  gifts      Gift[]
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  childName   String
+  mitzvahType MitzvahType
+  charityId   String
+  charity     Charity      @relation(fields: [charityId], references: [id])
+  hostId      String
+  host        User         @relation(fields: [hostId], references: [id])
+  userEmail   String
+  createdAt   DateTime     @default(now())
+  gifts       Gift[]
 }
 
 model Gift {

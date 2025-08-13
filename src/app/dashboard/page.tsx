@@ -1,4 +1,4 @@
-import { prisma } from "@/src/lib/prisma";
+import { db } from "../../lib/db";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -10,7 +10,7 @@ export default async function DashboardPage() {
   }
 
   // Example: load gifts or events for the signed-in user
-  const user = await prisma.user.findUnique({
+  const user = await db.user.findUnique({
     where: { email: session.user.email },
     include: {
       events: {

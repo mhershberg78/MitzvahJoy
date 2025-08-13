@@ -37,11 +37,12 @@ model User {
 }
 
 model Charity {
-  id         String   @id @default(cuid())
-  name       String
-  email      String?
-  createdAt  DateTime @default(now())
-  events     Event[]      // back-relation to Event.charity
+  id        String   @id @default(cuid())
+  name      String
+  email     String?
+  url       String?   // <-- NEW: optional URL for the charity
+  createdAt DateTime  @default(now())
+  events    Event[]   // back-relation to Event.charity
 }
 
 model Event {
